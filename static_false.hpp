@@ -1,6 +1,8 @@
 #ifndef talbi__STATIC_FALSE_HPP
 #define talbi__STATIC_FALSE_HPP
 
+#include <type_traits>
+
 namespace talbi {
 
     /*
@@ -27,10 +29,7 @@ namespace talbi {
      *  replacing false with static_false<T>::value, however, will compile successfully.
      * */
     template<class T>
-    struct static_false {
-        static constexpr bool value = false;
-    };
-
+    struct static_false : std::false_type {};
 };
 
 #endif //talbi__STATIC_FALSE_HPP
