@@ -94,12 +94,12 @@ private:
 template<class Period = std::milli,
             class F, class... Args>
 bench_stat bench(std::size_t trials, F f, Args... args) {
-    using std::chrono::high_resolution_clock;
+    using hrc = std::chrono::high_resolution_clock;
     std::vector<double> data(trials);
     std::for_each(Parallel data.begin(), data.end(), [&](auto &i) { 
-            auto before = high_resolution_clock::now();
+            auto before = hrc::now();
             std::invoke(f, args...); 
-            auto after = high_resolution_clock::now();
+            auto after = hrc::now();
             i = std::chrono::duration<double, Period>(after - before).count();
     });
     
