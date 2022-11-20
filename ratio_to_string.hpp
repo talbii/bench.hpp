@@ -45,7 +45,7 @@ talbi__func<std::exa>(void) { return "E"; }
 #ifndef talbi__DISABLE_TIME_SPECIALIZATIONS
 talbi__func<std::ratio<60>>(void) { return "min"; }
 talbi__func<std::ratio<3600>>(void) { return "h"; }
-talbi__func<std::ratio<86400>>(void) { return "d"; }
+talbi__func<std::ratio<86400>>(void) { return "day"; }
 #endif
 
 #undef talbi__func
