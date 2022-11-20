@@ -123,5 +123,9 @@ auto& print_stat(bench_stat& data, std::ostream& out = std::cout) {
                << "  Max:     " << data.max() << data.unit << 's' << '\n';
 }
 
+auto& print_stat(bench_stat &&data, std::ostream &ou = std::cout) {
+    return print_stat(data);
+}
+
 #undef Paralell
 #endif //talbi__BENCH_HPP
