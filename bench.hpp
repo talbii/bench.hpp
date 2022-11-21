@@ -40,7 +40,7 @@
 struct bench_stat {
     using property = std::optional<double>;
 
-    const std::string unit;
+    const char *unit;
     std::vector<double> data;
 
     const std::size_t trials;
@@ -49,7 +49,7 @@ struct bench_stat {
     property m_avg;
     property m_total;
 
-    bench_stat(const std::vector<double>& data, const std::string& unit) : data(data), trials(data.size()),
+    bench_stat(const std::vector<double>& data, const char *unit) : data(data), trials(data.size()),
                                                                                      unit(unit) {}
 
     constexpr double min(void) {
