@@ -127,5 +127,5 @@ auto& print_stat(bench_stat &&data, std::ostream &out = std::cout) {
     return print_stat(data, out);
 }
 
-#undef Paralell
+#undef Parallel
 #endif //talbi__BENCH_HPP
