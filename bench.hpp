@@ -17,6 +17,7 @@
 #include <algorithm>
 #include <iostream>
 #include <ostream>
+#include <string>
 
 /*
  * bench.hpp: talbi's simple benching utilities.
@@ -117,24 +118,28 @@ bench_stat bench(std::size_t trials, F f, Args... args) {
  *  with the corresponding unit, as defined by bench().
  * */
 
-auto& print_stat(bench_stat& data, std::ostream& out = std::cout) {
+template<class Char, class Traits = std::char_traits<Char>>
+auto& print_stat(bench_stat& data, std::basic_ostream<Char, Traits> &out = std::cout) {
     return out << "  Total:   " << data.total() << data.unit << 's' << " (N = " << data.trials << ')' << '\n'
                << "  Average: " << data.avg() << data.unit << 's' << '\n'
                << "  Min:     " << data.min() << data.unit << 's' << '\n'
                << "  Max:     " << data.max() << data.unit << 's' << '\n';
 }
 
-auto& print_stat(bench_stat &&data, std::ostream &out = std::cout) {
+template<class Char, class Traits = std::char_traits<Char>>
+auto& print_stat(bench_stat &&data, std::basic_ostream<Char, Traits> &out = std::cout) {
     return print_stat(data, out);
 }
 
 /* Provided is also an operator<< */
 
-auto& operator<<(std::ostream &out, bench_stat &data) {
+template<class Char, class Traits = std::char_traits<Char>>
+auto& operator<<(std::basic_ostream<Char, Traits> &out, bench_stat &data) {
     return print_stat(data, out);
 }
 
-auto& operator<<(std::ostream &out, bench_stat &&data) {
+template<class Char, class Traits = std::char_traits<Char>>
+auto& operator<<(std::basic_ostream<Char,Traits> &out, bench_stat &&data) {
     return print_stat(data, out);
 }
 
