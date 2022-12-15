@@ -56,7 +56,7 @@ bench<std::ratio<1>>(.); // measures in seconds
 bench<std::ratio<60>>(.); // measures in minutes
 ```
 
-In the case where the macro `talbi__DISABLE_TIME_SPECIALIZATIONS` is *not* defined, printing a `bench_stat` obtained by the periods `std::ratio<60>` (minutes), `std::ratio<3600>` (hours) and `std::ratio<86400>` (days) is not possible.
+In the case where the macro `talbi__DISABLE_TIME_SPECIALIZATIONS` is *not* defined, printing a `bench_stat` obtained by the periods `std::ratio<60>` (minutes), `std::ratio<3600>` (hours) and `std::ratio<86400>` (days) is also possible.
 
 Printing a `bench_stat` object will output the information:
 - Total running time, as well as the number of trials
