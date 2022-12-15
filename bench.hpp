@@ -15,14 +15,14 @@
 #include <chrono>
 #include <numeric>
 #include <algorithm>
-#include <iostream>
+#include <ostream>
 
 /*
  * bench.hpp: talbi's simple benching utilities.
  *
  *  Usage. run `bench(trials, f, Args...)` to test the call f(Args...) for `trials` times.
  *         Returns a `bench_stat` struct which contains some information about the bench.
- *         Print a `bench_stat` using the print_stat() function, or access the data directly
+ *         Print a `bench_stat` using the standard operator<<, or access the data directly
  *         by accessing bench_stat.data, a field of std::vector<double>.
  *
  *         It is possible to change the measure time (e.g., measure time in nanoseconds instead 
@@ -107,7 +107,7 @@ bench_stat bench(std::size_t trials, F f, Args... args) {
 }
 
 /*
- * print_stat prints a bench_stat object to the ostream `out`.
+ * prints a bench_stat object to the ostream `out`.
  *  Prints the following statistics:
  *    - Total execution time 
  *    - Average execution time
@@ -124,6 +124,16 @@ auto& print_stat(bench_stat& data, std::ostream& out = std::cout) {
 }
 
 auto& print_stat(bench_stat &&data, std::ostream &out = std::cout) {
+    return print_stat(data, out);
+}
+
+/* Provided is also an operator<< */
+
+auto& operator<<(std::ostream &out, bench_stat &data) {
+    return print_stat(data, out);
+}
+
+auto& operator<<(std::ostream &out, bench_stat &&data) {
     return print_stat(data, out);
 }
 
