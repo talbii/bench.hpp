@@ -1,6 +1,11 @@
 #ifndef talbi__BENCH_HPP
 #define talbi__BENCH_HPP
 
+/*
+ * Set the macro `Parallel` to either std::execution::par_unseq,
+ *  (if the compiler supports it), or nothing.  This makes summation
+ *  in bench_stat::total() (much) faster.
+ * */
 #if(defined(__GNUC__) && !defined(__llvm__) && __cplusplus >= 201703L)
 #include <execution>
 #define Parallel std::execution::par_unseq, 
@@ -9,16 +14,14 @@
 #endif
 
 #include "ratio_to_string.hpp"
-#include <functional>
-#include <vector>
-#include <optional>
-#include <string>
-#include <chrono>
-#include <numeric>
-#include <algorithm>
-#include <iostream>
-#include <ostream>
-#include <string>
+#include <functional> // std::invoke
+#include <vector>     // std::vector (bench_stat)
+#include <optional>   // bench_stat::property
+#include <chrono>     // std::chrono::high_resolution_clock
+#include <numeric>    // std::reduce
+#include <algorithm>  // std::minmax_element
+#include <iostream>   // std::cout (default parameter for print_stat)
+#include <ostream>    // std::basic_ostream
 
 /*
  * bench.hpp: talbi's simple benching utilities.
@@ -101,7 +104,7 @@ bench_stat bench(std::size_t trials, F f, Args... args) {
     std::vector<double> data(trials);
     std::for_each(Parallel data.begin(), data.end(), [&](auto &i) { 
             auto before = hrc::now();
-            std::invoke(f, args...); 
+            std::invoke(f, args...);
             auto after = hrc::now();
             i = std::chrono::duration<double, Period>(after - before).count();
     });
