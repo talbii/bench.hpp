@@ -9,6 +9,7 @@
 #endif
 
 #include "ratio_to_string.hpp"
+#include <functional>
 #include <vector>
 #include <optional>
 #include <string>
