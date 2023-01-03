@@ -8,7 +8,7 @@ Requires C++17 to compile and run.
 
 ## Limitations
 
-The main limitation comes when attempting to bench a function without anything else. Because a CPU has some cache, the initial running time of a function is much higher then if one runs multiple iterations of it. As such, if you need to bench several functions, it is probably best to "warmup" with some random calculations:
+The main limitation comes when attempting to bench a function without anything else. Because a modern CPU operates using cache, the initial running time of a function is much higher then if one runs multiple iterations of it, because of cache misses. As such, if you need to bench several functions, it is probably best to "warmup" with some random calculations:
 
 <table>
 <tr>
@@ -44,6 +44,8 @@ auto r1 = bench(trials, f1, args1...),
 </td>
 </tr>
 </table>
+
+These changes would lead to a much more accurate value of the maximum running time. If the maximal running time for a single call is not important, it is also possible to avoid this problem by setting `trials` to a large enough value.
 
 ## Examples
 
