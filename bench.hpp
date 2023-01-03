@@ -121,10 +121,10 @@ bench_stat bench(std::size_t trials, F f, Args... args) {
 
 template<class Char, class Traits = std::char_traits<Char>>
 auto& print_stat(bench_stat& data, std::basic_ostream<Char, Traits> &out = std::cout) {
-    return out << "  Total:   " << data.total() << data.unit << 's' << " (N = " << data.trials << ')' << '\n'
+    return out << "    Total: " << data.total() << data.unit << 's' << " (N = " << data.trials << ')' << '\n'
                << "  Average: " << data.avg() << data.unit << 's' << '\n'
-               << "  Min:     " << data.min() << data.unit << 's' << '\n'
-               << "  Max:     " << data.max() << data.unit << 's' << '\n';
+               << "      Min: " << data.min() << data.unit << 's' << '\n'
+               << "      Max: " << data.max() << data.unit << 's' << '\n';
 }
 
 template<class Char, class Traits = std::char_traits<Char>>
