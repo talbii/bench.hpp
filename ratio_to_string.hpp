@@ -22,33 +22,33 @@
 template<class R>
 constexpr const char* ratio_to_string(void);
 
-#define talbi__func template<> constexpr const char* ratio_to_string
+#define talbi__define_ratio_to_string(T, L) template<> constexpr const char* ratio_to_string<T>(void) { return L; }
 
-talbi__func<std::atto>(void) { return "a"; }
-talbi__func<std::femto>(void) { return "f"; }
-talbi__func<std::pico>(void) { return "p"; }
-talbi__func<std::nano>(void) { return "n"; }
-talbi__func<std::micro>(void) { return "µ"; }
-talbi__func<std::milli>(void) { return "m"; }
-talbi__func<std::centi>(void) { return "c"; }
-talbi__func<std::deci>(void) { return "d"; }
-talbi__func<std::ratio<1>>(void) { return ""; }
-talbi__func<std::deca>(void) { return "da"; }
-talbi__func<std::hecto>(void) { return "h"; }
-talbi__func<std::kilo>(void) { return "k"; }
-talbi__func<std::mega>(void) { return "M"; }
-talbi__func<std::giga>(void) { return "G"; }
-talbi__func<std::tera>(void) { return "T"; }
-talbi__func<std::peta>(void) { return "P"; }
-talbi__func<std::exa>(void) { return "E"; }
+talbi__define_ratio_to_string(std::atto, "a")
+talbi__define_ratio_to_string(std::femto, "f")
+talbi__define_ratio_to_string(std::pico, "p")
+talbi__define_ratio_to_string(std::nano, "n") 
+talbi__define_ratio_to_string(std::micro, "µ")
+talbi__define_ratio_to_string(std::milli, "m")
+talbi__define_ratio_to_string(std::centi, "c")
+talbi__define_ratio_to_string(std::deci, "d")
+talbi__define_ratio_to_string(std::ratio<1>, "")
+talbi__define_ratio_to_string(std::deca, "da")
+talbi__define_ratio_to_string(std::hecto, "h")
+talbi__define_ratio_to_string(std::kilo, "k")
+talbi__define_ratio_to_string(std::mega, "M")
+talbi__define_ratio_to_string(std::giga, "G")
+talbi__define_ratio_to_string(std::tera, "T")
+talbi__define_ratio_to_string(std::peta, "P")
+talbi__define_ratio_to_string(std::exa, "E")
 
 #ifndef talbi__DISABLE_TIME_SPECIALIZATIONS
-talbi__func<std::ratio<60>>(void) { return "min"; }
-talbi__func<std::ratio<3600>>(void) { return "h"; }
-talbi__func<std::ratio<86400>>(void) { return "day"; }
+talbi__define_ratio_to_string(std::ratio<60>, "min")
+talbi__define_ratio_to_string(std::ratio<3600>, "h")
+talbi__define_ratio_to_string(std::ratio<86400>, "day")
 #endif
 
-#undef talbi__func
+#undef talbi__define_ratio_to_string
 
 template<class R>
 constexpr const char* ratio_to_string(void) {
