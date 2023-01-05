@@ -1,1 +1,2 @@
-*.out # Ignore binaries inside examples/
+# Ignore binaries inside examples/
+*.out
