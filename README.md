@@ -68,5 +68,7 @@ Printing a `bench_stat` object will output the information:
 
 If needed, it is possible to save the `bench_stat` object and only print/manipulate those values, using the respective `.<property>()` methods.
 
+### Actual Code Example
 
+Code examples are available under the directory [examples/](examples/).
 
