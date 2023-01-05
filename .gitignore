@@ -1,2 +1,4 @@
 # Ignore binaries inside examples/
 *.out
+
+.DS_Store
