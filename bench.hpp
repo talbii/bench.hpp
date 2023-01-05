@@ -46,7 +46,6 @@
 struct bench_stat {
     using property = std::optional<double>;
 
-    const char *unit;
     std::vector<double> data;
 
     const std::size_t trials;
@@ -54,6 +53,8 @@ struct bench_stat {
     property m_max;
     property m_avg;
     property m_total;
+
+    const char *unit;
 
     bench_stat(const std::vector<double>& data, const char *unit) : data(data), trials(data.size()),
                                                                                      unit(unit) {}
