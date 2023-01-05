@@ -11,7 +11,7 @@ concept is_addable = requires (T a, T b) {
 };
 
 /* We will be benchmarking summarize for different
- * values for policy: seq, par, par_unseq. */
+ * values for policy: seq, par, par_unseq, unseq. */
 template<typename A, typename execution_policy> requires is_addable<A>
 A summarize (const std::vector<A> &vec, const execution_policy &policy) {
     return std::reduce(policy, vec.cbegin(), vec.cend());
@@ -28,6 +28,12 @@ int main(void) {
      * will not remove our computation */
     std::vector<int> vec(vec_size, 123);
 
+    /*
+     * Our benchmarking is to check the
+     * effects of different execution
+     * policies on the time it takes to
+     * reduce a vector of integers.
+     * */
 
     std::cout << "seq (synchronised, slow):\n"
               << bench(trials, summarize<int, sequenced_policy>, vec, seq) << '\n';
