@@ -4,7 +4,11 @@
 /*
  * Set the macro `Parallel` to either std::execution::par_unseq,
  *  (if the compiler supports it), or nothing.  This makes summation
- *  in bench_stat::total() (much) faster.
+ *  in bench_stat::total() (much) faster. 
+ *
+ * More importantly, this makes `bench` perform its benchmarks on
+ *  seperate threads, which hopefully will result in faster total
+ *  benchmark time.
  * */
 #if(defined(__GNUC__) && !defined(__llvm__) && __cplusplus >= 201703L)
 #include <execution>
