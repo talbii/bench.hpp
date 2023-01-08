@@ -96,7 +96,6 @@ private:
     }
 };
 
-#undef constexpr_if
 
 template<class Period = std::milli,
             class F, class... Args>
