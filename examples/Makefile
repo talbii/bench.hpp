@@ -1,5 +1,6 @@
-cc = clang++  # note: in case of policies.cpp it is not possible to use clang.
-ccflags = -Wall -I ../ -std=c++20 -O2
+cc = g++-12  # note: in case of policies.cpp it is not possible to use clang.
+ccflags = -Wall -Wextra -I ../ -std=c++2b
+optflags = -fopenmp -ftree-vectorize -O2
 sources = $(wildcard *.cpp)
 targets = $(patsubst %.cpp,%.out,$(sources))
 
@@ -8,4 +9,4 @@ targets = $(patsubst %.cpp,%.out,$(sources))
 all: $(targets)
 
 %.out: %.cpp
-	$(cc) $(ccflags) -o  $@ $<
+	$(cc) $(ccflags) $(optflags) -o  $@ $<
