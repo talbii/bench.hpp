@@ -104,13 +104,18 @@ private:
 template<class Period = std::milli,
             class F, class... Args>
 bench_stat bench(std::size_t trials, F f, Args... args) {
-    using hrc = std::chrono::high_resolution_clock;
     std::vector<double> data(trials);
     std::for_each(Parallel data.begin(), data.end(), [&](auto &i) { 
-            auto before = hrc::now();
+#ifdef BENCH_LEGACy
+#define talbi__clock std::chrono::high_resolution_clock
+#else
+#define talbi__clock std::chrono::steady_clock
+#endif
+            auto before = talbi__clock::now();
             std::invoke(f, args...);
-            auto after = hrc::now();
+            auto after = talbi__clock::now();
             i = std::chrono::duration<double, Period>(after - before).count();
+#undef talbi__clock
     });
     
     return bench_stat(data, ratio_to_string<Period>());
