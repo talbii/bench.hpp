@@ -47,7 +47,13 @@ auto r1 = bench(trials, f1, args1...),
 
 These changes would lead to a much more accurate value of the maximum running time. If the maximal running time for a single call is not important, it is also possible to avoid this problem by setting `trials` to a large enough value.
 
-## Examples
+Another limitation is the performance of the clock `steady_clock`. It may impact your performance, and actually eat a good chunk of the time spent computing.
+
+## Basic Usage
+
+Include `<bench.hpp>` (it is a header-only library). Benchmarking is done using `bench<Period>(trials, f, args...)` (with `Period` being any ratio defined in `<ratio>` such as `std::micro`, `std::milli`, etc.). Returned is `bench_stat` (just save it using `auto`, or just print it straight away). Printing is possible using either `print_stat(std::ostream&, bench_stat&&)` or an `operator<<`.
+
+### Okay, and in more detail?
 
 In the `bench.hpp` header there are two functions: `bench` and `print_stat`. Benching has the signature `bench(trials, f, args...)` and offers a template type called `Period`, which by default is set to `std::milli`. Setting `Period` to any ratio defined in `<ratio>` (specifically, from `atto` to `exa`) will result in a measurement in the unit `Period`. For example:
 
@@ -67,6 +73,8 @@ Printing a `bench_stat` object will output the information:
 - Average running time 
 
 If needed, it is possible to save the `bench_stat` object and only print/manipulate those values, using the respective `.<property>()` methods.
+
+By default clock measurement is done using `std::chrono::steady_clock`. This is because this clock guarantees monotonic time, which is especially important when benchmarking fast tasks. Previously `std::chrono::high_resolution_clock` was used. It is possible to revert to this old behvaiour using `#define BENCH_LEGACY`.
 
 ### Actual Code Example
 
