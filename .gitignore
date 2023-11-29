@@ -1,4 +1,9 @@
 # Ignore binaries inside examples/
 *.out
+# And assembly output
+*.s
 
+# macOS stuff
 .DS_Store
+
+.clangd
